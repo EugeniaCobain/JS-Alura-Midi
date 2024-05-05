@@ -1,0 +1,29 @@
+//DECLARACIÓN DE VARIABLES
+const listaDeTeclas = document.querySelectorAll('.tecla');
+
+//FUNCIÓN PARA QUE SE REPRODUZCA EL SONIDO CORRESPONDIENTE A CADA TECLA
+function playSonido(idElementoAudio) {
+    document.querySelector(idElementoAudio).play();
+}
+
+for (let contador = 0; contador < listaDeTeclas.length; contador = contador + 1) {
+    const tecla = listaDeTeclas[contador];
+    const instrumento = tecla.classList[1];
+    const idAudio = `#sonido_${instrumento}`; 
+    
+    tecla.onclick = function(){
+        playSonido(idAudio);
+    };
+
+    tecla.onkeydown = function (evento){
+        console.log(evento.code);
+        if (evento.code === 'Space'|| evento.code === 'Enter') {
+            tecla.classList.add('activa');
+        }
+    }
+
+    tecla.onkeyup = function (){
+        tecla.classList.remove('activa');
+    }
+}
+
